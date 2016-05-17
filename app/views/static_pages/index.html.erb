@@ -1,6 +1,9 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
+    <form id="new-form">
+      <input type="text" class="new-todo">
+    </form>
   </header>
 
   <section class="main">
@@ -12,6 +15,12 @@
 
 <script>
   $(function() {
+    $('#new-form').submit(function(event) {
+      event.preventDefault();
+      var textbox = $('.new-todo');
+      console.log("Task: ", textbox.val() );
+    });
+
     // Take in a JavaScript representation of the task
     // and produce an HTML representation in <li> tags
     function taskHtml(task) {
@@ -36,6 +45,7 @@
       });
     }
 
+    // GET request to display todo's
     $.get("/tasks").success(function(data) {
       var htmlString = "";
 
